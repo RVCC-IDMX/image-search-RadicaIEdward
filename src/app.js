@@ -16,18 +16,26 @@ form.addEventListener('submit', async (event) => {
 
   console.log(response);
 
-  /*
-  some sample code
-    const dataObj = response.results[0];
-    const postImg = clone.querySelector('.post__img');
-    postImg.src = dataObj.urls.small;
-    postImg.alt = dataObj.alt_description;
-  */
+  const dataObj = response.results;
+  const container = document.querySelector('.container');
+  const template = document.querySelector('#template');
+  // const postImg = clone.querySelector('.post__img');
+  // postImg.src = dataObj.urls.small;
+  // postImg.alt = dataObj.alt_description;
 
   /*
     Loop through the results[] array. For each result, create a clone of the
     template and append it to the DOM element with the .container class.
   */
+  dataObj.forEach((result) => {
+    const clone = template.content.cloneNode(true);
+
+    container.appendChild(clone);
+
+    const postImg = container.querySelector('.post__img');
+
+    postImg.src = result.urls.small;
+  });
 
   /*
     Add an attribution statement below the image using the
@@ -35,7 +43,7 @@ form.addEventListener('submit', async (event) => {
    */
 
   /*
-    Check the description of the post. If it's bot bull and less than 100 characters,
+    Check the description of the post. If it's not null and less than 100 characters,
     add the description from dataObj to the post. If it's more than 100 characters,
     add the first 100 characters of the description from dataObj to the post followed by
     an ellipsis (...)
