@@ -14,7 +14,7 @@ form.addEventListener('submit', async (event) => {
     .then((res) => res.json())
     .catch((err) => console.error(err));
 
-  console.log(response);
+  // console.log(response);
 
   const dataObj = response.results;
   const container = document.querySelector('.container');
