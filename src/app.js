@@ -37,9 +37,9 @@ form.addEventListener('submit', async (event) => {
 
       if (postDescText !== null) {
         if (postDescText.length <= 100) {
-          postDescription.textContent = `${postDescText}`;
+          postDescription.textContent = postDescText;
         } else {
-          postDescription.textContent = postDescText.substr(0, 99);
+          postDescription.textContent = `${postDescText.substr(0, 99)}...`;
         }
       }
 
