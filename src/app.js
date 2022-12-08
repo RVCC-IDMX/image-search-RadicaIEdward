@@ -24,6 +24,13 @@ form.addEventListener('submit', async (event) => {
     Loop through the results[] array. For each result, create a clone of the
     template and append it to the DOM element with the .container class.
   */
+
+  function clearCurrentResults(parent) {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+    }
+  }
+
   function appendResults(results) {
     results.forEach((result) => {
       const clone = template.content.cloneNode(true);
