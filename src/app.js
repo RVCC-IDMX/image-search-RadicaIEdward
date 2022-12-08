@@ -19,6 +19,7 @@ form.addEventListener('submit', async (event) => {
   const dataObj = response.results;
   const container = document.querySelector('.container');
   const template = document.querySelector('#template');
+
   // const postImg = clone.querySelector('.post__img');
   // postImg.src = dataObj.urls.small;
   // postImg.alt = dataObj.alt_description;
@@ -27,16 +28,20 @@ form.addEventListener('submit', async (event) => {
     Loop through the results[] array. For each result, create a clone of the
     template and append it to the DOM element with the .container class.
   */
-  dataObj.forEach((result) => {
-    const clone = template.content.cloneNode(true);
+  function appendResults(results) {
+    results.forEach((result) => {
+      const clone = template.content.cloneNode(true);
+      const postImg = clone.querySelector('.post__img');
+      const postUser = clone.querySelector('.post__user');
 
-    container.appendChild(clone);
+      postImg.src = result.urls.small;
+      postUser.textContent = `by ${result.user.name.toString()}`;
 
-    const postImg = container.querySelector('.post__img');
+      container.append(clone);
+    });
+  }
 
-    postImg.src = result.urls.small;
-  });
-
+  appendResults(dataObj);
   /*
     Add an attribution statement below the image using the
     postUser element and the photographer's name from dataObj
