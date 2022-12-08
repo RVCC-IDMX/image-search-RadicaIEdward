@@ -25,9 +25,9 @@ form.addEventListener('submit', async (event) => {
     template and append it to the DOM element with the .container class.
   */
 
-  function clearCurrentResults(parent) {
-    while (parent.firstChild) {
-      parent.removeChild(parent.firstChild);
+  function clearContainerResults(container) {
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
     }
   }
 
@@ -49,11 +49,13 @@ form.addEventListener('submit', async (event) => {
           postDescription.textContent = `${postDescText.substr(0, 99)}...`;
         }
       }
-
       container.append(clone);
     });
   }
 
+  if (container.hasChildNodes) {
+    clearCurrentResults(container);
+  }
   appendResults(dataObj);
 
   /*
