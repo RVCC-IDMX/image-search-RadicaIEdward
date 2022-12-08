@@ -20,14 +20,9 @@ form.addEventListener('submit', async (event) => {
   const container = document.querySelector('.container');
   const template = document.querySelector('#template');
 
-  /*
-    Loop through the results[] array. For each result, create a clone of the
-    template and append it to the DOM element with the .container class.
-  */
-
-  function clearContainerResults(container) {
-    while (container.firstChild) {
-      container.removeChild(container.firstChild);
+  function clearContainerResults(parent) {
+    while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
     }
   }
 
@@ -54,14 +49,8 @@ form.addEventListener('submit', async (event) => {
   }
 
   if (container.hasChildNodes) {
-    clearCurrentResults(container);
+    clearContainerResults(container);
   }
-  appendResults(dataObj);
 
-  /*
-    Check the description of the post. If it's not null and less than 100 characters,
-    add the description from dataObj to the post. If it's more than 100 characters,
-    add the first 100 characters of the description from dataObj to the post followed by
-    an ellipsis (...)
-  */
+  appendResults(dataObj);
 });
