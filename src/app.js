@@ -20,10 +20,6 @@ form.addEventListener('submit', async (event) => {
   const container = document.querySelector('.container');
   const template = document.querySelector('#template');
 
-  // const postImg = clone.querySelector('.post__img');
-  // postImg.src = dataObj.urls.small;
-  // postImg.alt = dataObj.alt_description;
-
   /*
     Loop through the results[] array. For each result, create a clone of the
     template and append it to the DOM element with the .container class.
@@ -33,19 +29,25 @@ form.addEventListener('submit', async (event) => {
       const clone = template.content.cloneNode(true);
       const postImg = clone.querySelector('.post__img');
       const postUser = clone.querySelector('.post__user');
+      const postDescription = clone.querySelector('.post__desc');
+      const postDescText = result.description;
 
       postImg.src = result.urls.small;
-      postUser.textContent = `by ${result.user.name.toString()}`;
+      postUser.textContent = `by ${result.user.name.toString()} `;
+
+      if (postDescText !== null) {
+        if (postDescText.length <= 100) {
+          postDescription.textContent = `${postDescText}`;
+        } else {
+          postDescription.textContent = postDescText.substr(0, 99);
+        }
+      }
 
       container.append(clone);
     });
   }
 
   appendResults(dataObj);
-  /*
-    Add an attribution statement below the image using the
-    postUser element and the photographer's name from dataObj
-   */
 
   /*
     Check the description of the post. If it's not null and less than 100 characters,
